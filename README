@@ -1,0 +1,67 @@
+MavPi
+-----
+
+Synopsis
+--------
+Daemon to extract temperature data from a Maverick ET732 BBQ monitor and a Dallas OneWire digital thermometer, plotting the points to a Highcharts-based graph every 12 seconds.
+
+Implementation Information
+--------------------------
+The daemon is mostly inspired by Michael Posavec's excellent "Wifi BBQ" OpenPicus project, but written from the ground up to work with Raspberry Pi and the pigpio Raspberry Pi GPIO library.
+
+The daemon is near-monolithic, with minimal code and dependencies (only libc, librt and libpthreadsi are required). The one-wire (w1*) kernel modules should be removed prior to usage. 
+
+The code is probably far from perfect, but it works (most of the time). In testing, the daemon has run for >48 hours, sampling at ~12sec intervals - the default TX interval of the Maverick. CRC and header checks have been implemented for the Maverick and OneWire, respectively, so if a result is bad, it is dropped.
+
+Requirements
+------------
+Software Requirements
+    Daemon
+    - pigpio -- C-Library for low-level GPIO reading
+
+    Web Graphs
+    - lighttpd -- Webserver
+    - Highcharts -- Client-side Javascript graphing 
+    - Node.js -- Server-side Javascript to poll readings
+    - socket.io -- Client-side and server-side glue
+
+Hardware Requirements
+    - Raspberry Pi 1 (ARMv6 version)
+    - Maverick ET-732
+    - Aurel RX MID 3V
+    - Maxim DS18S20 Digital Thermometer
+    - 4.7k resistor (for DS18S20)
+    - Breadboard OR electronics soldering kit to connect it all
+
+Wiring
+    Aurel RX MID 3V
+    - Pin 1   - 17cm aerial
+    - Pin 6&7 - GND
+    - Pin 9   - GPIO
+    - Pin 10  - 3.3V
+
+Maxim DS18S20
+    - Pin 1   - GND
+    - Pin 2*  - GPIO
+    - Pin 3*  - 3.3V
+        * Bridge pins 2 & 3 with the 4.7k resistor
+
+References
+----------
+Desc: Amazing idea and rich technical data for OpenPicus and a Maverick:
+URL:  http://blog.openpicus.com/2013/02/better-bbq-with-flyport-and-cosm.html
+
+Desc: The best library (IMHO) for sampling the GPIO with callbacks:
+URL:  http://abyz.co.uk/rpi/pigpio/cif.html
+
+Desc: Great explanation of how the DS18S20 works:
+URL:  http://www.maximintegrated.com/en/app-notes/index.mvp/id/162
+
+Desc: Maxim DS18S20 specification:
+URL:  http://datasheets.maximintegrated.com/en/ds/DS18S20.pdf
+
+Desc: Aurel RX MID 3V specification:
+URL:  http://www.aurelwireless.com/wp-content/uploads/user-manual/650201034G_um.pdf
+
+Desc: Invaluable guide for writing any C-daemon:
+URL:  http://www.linuxprofilm.com/articles/linux-daemon-howto.html
