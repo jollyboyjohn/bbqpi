@@ -3,13 +3,13 @@ BBQPi
 
 Synopsis
 --------
-Daemon to extract temperature data from a Maverick ET732 BBQ monitor and a Dallas OneWire digital thermometer, plotting the points to a Highcharts-based graph every 12 seconds.
+Daemon to extract temperature data from a Maverick ET732 BBQ monitor and a Dallas OneWire digital thermometer, using a Version 1 Raspberry Pi. Additionally, there's some Javascript code to plot the points to a Highcharts-based graph every 12 seconds.
 
 Implementation Information
 --------------------------
 The daemon is mostly inspired by Michael Posavec's excellent "Wifi BBQ" OpenPicus project, but written from the ground up to work with Raspberry Pi and the pigpio Raspberry Pi GPIO library.
 
-The daemon is near-monolithic, with minimal code and dependencies (only libc, librt and libpthreadsi are required). The one-wire (w1*) kernel modules should be removed prior to usage. 
+The daemon is near-monolithic, with minimal code and dependencies (only libc, librt and libpthreads are required). The one-wire (w1*) kernel modules should be removed prior to usage. 
 
 The code is probably far from perfect, but it works (most of the time). In testing, the daemon has run for >48 hours, sampling at ~12sec intervals - the default TX interval of the Maverick. CRC and header checks have been implemented for the Maverick and OneWire, respectively, so if a result is bad, it is dropped.
 
@@ -65,3 +65,6 @@ URL:  http://www.aurelwireless.com/wp-content/uploads/user-manual/650201034G_um.
 
 Desc: Invaluable guide for writing any C-daemon:
 URL:  http://www.linuxprofilm.com/articles/linux-daemon-howto.html
+
+Desc: A nice nodejs startup script by Anthony Ettinger:
+URL:  https://github.com/chovy/node-startup
