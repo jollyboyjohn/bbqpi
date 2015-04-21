@@ -10,7 +10,7 @@
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 DAEMON=/usr/local/sbin/bbqpi
 NAME=bbqpi
-DESC="BBQ Temperature Monitor"
+DESC="BBQ Monitor"
 
 set -e
 

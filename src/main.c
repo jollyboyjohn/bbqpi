@@ -38,13 +38,13 @@ int pollprobes(void) {
 	    
         if (getMaverickTemp(rf_gpio, &p_food, &p_bbq)) {
             sprintf(line + strlen(line), ",%d,%d\n", p_food, p_bbq);
-            fh = fopen ("/var/www/bbq.csv", "a");
+            fh = fopen ("/var/www/bbqpi.csv", "a");
             fprintf(fh, line);
             fclose(fh);
 	    sleep(11);
 	} else {
             sprintf(line + strlen(line), ",,\n");
-	    fh = fopen ("/var/www/bbq.csv", "a");
+	    fh = fopen ("/var/www/bbqpi.csv", "a");
             fprintf(fh, line);
             fclose(fh);
 	}

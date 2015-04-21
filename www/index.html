@@ -45,15 +45,53 @@ $(function() {
 	        text: 'Temperature (°C)',
 	    },
             min: 0,
+	    tickInterval: 25,
+            plotLines: [{
+                color: 'red',
+		dashStyle: 'longdashdot',
+                value: 46,
+                width: 1, 
+		label: { 
+			text: 'Steak Sear Point',
+			align: 'left'
+		},
+	    },
+            {
+                color: 'red',
+		dashStyle: 'longdashdot',
+                value: 66,
+                width: 1, 
+		label: { 
+			text: 'Chicken Sear Point',
+			align: 'left'
+		}
+	    }],
             plotBands: [{
-                color: 'ghostwhite',
-                from: 57,
-                to: 63 
-            }],
-            plotBands: [{
-                color: 'gainsboro',
-                from: 63,
-                to: 69 
+                color: 'yellow',
+                from: 74,
+                to: 84, 
+		label: { 
+			text: 'Chicken Ready',
+			align: 'left'
+		}
+            },
+            {
+                color: 'Gainsboro',
+                from: 107,
+                to: 121, 
+		label: { 
+			text: 'Oven: Low n Slow',
+			align: 'left'
+		}
+	    },
+            {
+                color: 'Gainsboro',
+                from: 162,
+                to: 174, 
+		label: { 
+			text: 'Oven: Medium',
+			align: 'left'
+		}
             }],
 	},
 	plotOptions: {
@@ -66,7 +104,9 @@ $(function() {
 	},
         data: {
             csv: csv
-        }
+        },
+        colors: ['#8085e9', '#f45b5b', '#434348',
+            '#f15c80', '#e4d354', '#2b908f', '#f45b5b', '#91e8e1']
     });
     });
 });
